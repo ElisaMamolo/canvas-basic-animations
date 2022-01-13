@@ -13,6 +13,12 @@ const myGameArea = {
     //call update game area every 20 seconds
     this.interval = setInterval(updateGameArea, 20);
   },
+  score: function () {
+    const points = Math.floor(this.frames / 5);
+    this.context.font = '18px serif';
+    this.context.fillStyle = 'black';
+    this.context.fillText(`Score: ${points}`, 350, 50);
+  },
   clear: function () {
     //get context and clear canvas
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -60,11 +66,16 @@ class Component {
   bottom() {
     return this.y + this.height;
   }
- 
+
   crashWith(obstacle) {
-      //method for class component, we pass the object obstacle
-      //returns a boolean if we crashed or not
-    return !(this.bottom() < obstacle.top() || this.top() > obstacle.bottom() || this.right() < obstacle.left() || this.left() > obstacle.right());
+    //method for class component, we pass the object obstacle
+    //returns a boolean if we crashed or not
+    return !(
+      this.bottom() < obstacle.top() ||
+      this.top() > obstacle.bottom() ||
+      this.right() < obstacle.left() ||
+      this.left() > obstacle.right()
+    );
   }
 }
 
@@ -104,6 +115,10 @@ function updateGameArea() {
   player.update();
   //update obstacle
   this.updateObstacles();
+  //check if game over
+  checkGameOver();
+  // update and draw the score
+  myGameArea.score();
 }
 
 function updateObstacles() {
@@ -134,6 +149,16 @@ function updateObstacles() {
     myObstacles.push(
       new Component(10, x - height - gap, "green", x, height + gap)
     );
+  }
+}
+
+function checkGameOver() {
+  const crashed = myObstacles.some(function (obstacle) {
+    return player.crashWith(obstacle);
+  });
+
+  if (crashed) {
+    myGameArea.stop();
   }
 }
 
