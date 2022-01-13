@@ -82,16 +82,16 @@ class Component {
 document.addEventListener("keydown", (e) => {
   switch (e.keyCode) {
     case 38: // up arrow
-      player.speedY -= 1;
+      player.speedY -= 3;
       break;
     case 40: // down arrow
-      player.speedY += 1;
+      player.speedY += 3;
       break;
     case 37: // left arrow
-      player.speedX -= 1;
+      player.speedX -= 3;
       break;
     case 39: // right arrow
-      player.speedX += 1;
+      player.speedX += 3;
       break;
   }
 });
