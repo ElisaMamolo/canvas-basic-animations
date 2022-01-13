@@ -15,8 +15,8 @@ const myGameArea = {
   },
   score: function () {
     const points = Math.floor(this.frames / 5);
-    this.context.font = '18px serif';
-    this.context.fillStyle = 'black';
+    this.context.font = "18px serif";
+    this.context.fillStyle = "black";
     this.context.fillText(`Score: ${points}`, 350, 50);
   },
   clear: function () {
