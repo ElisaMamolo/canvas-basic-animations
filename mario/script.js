@@ -9,6 +9,8 @@ const ctx = canvas.getContext('2d');
 const backgroundImage = {
   img: img,
   x: 0,
+  //spped is negative so we go from right to left
+  //change it to positive and will go from left to right
   speed: -1,
 
   move: function() {
